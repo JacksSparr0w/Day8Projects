@@ -4,7 +4,7 @@ import by.javatr.exceptions.InvalidArgumentException;
 
 import java.util.Objects;
 
-public class Book implements Comparable<Book>{
+public class Book{
     private String name;
     private String author;
     private double price;
@@ -13,9 +13,9 @@ public class Book implements Comparable<Book>{
     public Book(String name, String author)throws InvalidArgumentException {
         //TODO: странные строки
         if (name == null || name.equals(""))
-            throw new InvalidArgumentException("Name is empty");
+            throw new InvalidArgumentException("Поле ИМЯ пусто");
         if (author == null || author.equals(""))
-            throw new InvalidArgumentException("Author is empty");
+            throw new InvalidArgumentException("Поле АВТОР пусто");
         
         this.name = name;
         this.author = author;
@@ -24,7 +24,7 @@ public class Book implements Comparable<Book>{
     public Book(String name, String author, double price) throws InvalidArgumentException{
         this(name, author);
         if (price <= 0)
-            throw new InvalidArgumentException("Price is nonPositive number");
+            throw new InvalidArgumentException("Цена не является положительным числом");
         this.price = price;
     }
 
@@ -79,8 +79,4 @@ public class Book implements Comparable<Book>{
         return Objects.hash(name, author, price, language);
     }
 
-    @Override
-    public int compareTo(Book book) {
-        return 0;
-    }
 }
