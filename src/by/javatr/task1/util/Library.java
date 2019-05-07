@@ -1,17 +1,18 @@
 package by.javatr.task1.util;
 
 import by.javatr.exceptions.*;
-    import by.javatr.task1.util.find.FindBy;
+import by.javatr.task1.util.find.FindBy;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Library implements BookListDao {
     List<Book> books;
 
     public Library(){
-        books = new ArrayList<Book>();
+        books = new ArrayList<>();
     }
 
     @Override
@@ -28,12 +29,12 @@ public class Library implements BookListDao {
             books.remove(b);
     }
 
+
+
     @Override
     public void removeBook(List<Book> removeList) throws NoBookException{
         for (Book b : removeList){
-            if(!books.contains(b))
-                throw new NoBookException("Такой книги не существует");
-            books.remove(b);
+            removeBook(b);
         }
     }
 
@@ -55,5 +56,25 @@ public class Library implements BookListDao {
     @Override
     public List<Book> getBooks() {
         return books.subList(0, books.size());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Library library = (Library) o;
+        return Objects.equals(books, library.books);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(books);
+    }
+
+    @Override
+    public String toString() {
+        return "Library{" +
+                "books=" + books +
+                '}';
     }
 }

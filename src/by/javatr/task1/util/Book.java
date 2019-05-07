@@ -11,7 +11,6 @@ public class Book{
     private Language language;
 
     public Book(String name, String author)throws InvalidArgumentException {
-        //TODO: странные строки
         if (name == null || name.equals(""))
             throw new InvalidArgumentException("Поле ИМЯ пусто");
         if (author == null || author.equals(""))
@@ -23,8 +22,8 @@ public class Book{
 
     public Book(String name, String author, double price) throws InvalidArgumentException{
         this(name, author);
-        if (price <= 0)
-            throw new InvalidArgumentException("Цена не является положительным числом");
+        if (price < 0)
+            throw new InvalidArgumentException("Цена является отрицательным числом");
         this.price = price;
     }
 
